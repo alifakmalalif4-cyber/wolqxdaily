@@ -1,198 +1,129 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>WOLQX DAILY</title>
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d1b">
+  <meta name="description" content="WOLQX DAILY — discover something new every day.">
+  <title>WOLQX DAILY — Discover More</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
-
 <body>
-
-    <header>
-        <div class="logo">✦ WOLQX DAILY</div>
-
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#facts">Facts</a>
-            <a href="#about">About</a>
-        </nav>
-        <button id="theme-toggle" onclick="toggleTheme()">
-    ☀️ Light Mode
-</button>
-    </header>
-
-    <main>
-        <section class="hero" id="home">
-
-            <h1>Your daily dose of <span>wonder.</span></h1>
-
-            <p>
-                Discover interesting facts, explore the world
-                and learn something new every day.
-            </p>
-
-            <button onclick="showRandomFact()">
-                Discover a Fact 🚀
-            </button>
-
-        </section>
-
-        <section class="section" id="facts">
-
-            <h2>Today's Discovery ✨</h2>
-
-            <div class="cards">
-
-                <div class="card">
-                    <h3 id="fact-title">
-                        Welcome to CurioLab!
-                    </h3>
-
-                    <p id="fact-description">
-                        Click the button above to discover
-                        something amazing.
-                    </p>
-                </div>
-
-            </div>
-
-        </section>
-
-<section class="section" id="categories">
-
-<div class="search-box">
-    <input
-        type="text"
-        id="category-search"
-        placeholder="🔍 Search Space, Nature, Science..."
-        oninput="searchCategories()"
-    >
-</div>
-<p id="search-message"></p>
-
-    <h2>🌍 Explore Categories</h2>
-
-    <p style="color:#aab4d0; margin-bottom:25px;">
-        Choose your favourite topic and discover something amazing!
-    </p>
-
-    <div class="cards">
-
-        <div class="card category-card">
-            <h3>🌌 Space</h3>
-            <p>Explore planets, stars and galaxies.</p>
-            <button onclick="showCategoryFacts('Space')">
-                Explore →
-            </button>
-        </div>
-
-        <div class="card category-card">
-            <h3>🌿 Nature</h3>
-            <p>Discover animals, forests and oceans.</p>
-            <button onclick="showCategoryFacts('Nature')">
-                Explore →
-            </button>
-        </div>
-
-        <div class="card category-card">
-            <h3>🔬 Science</h3>
-            <p>Discover amazing scientific facts.</p>
-            <button onclick="showCategoryFacts('Science')">
-                Explore →
-            </button>
-        </div>
-
-        <div class="card category-card">
-            <h3>💻 Technology</h3>
-            <p>Explore computers, AI and inventions.</p>
-            <button onclick="showCategoryFacts('Technology')">
-                Explore →
-            </button>
-        </div>
-
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="WOLQX DAILY home"><span class="brand-mark">✦</span><span>WOLQX <b>DAILY</b></span></a>
+    <nav class="main-nav" id="main-nav">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#discover" class="nav-link">Discover</a>
+      <a href="#quiz" class="nav-link">Quiz</a>
+      <a href="#challenge" class="nav-link">Challenge</a>
+      <a href="#profile" class="nav-link">My Progress</a>
+    </nav>
+    <div class="top-actions">
+      <button class="icon-button" id="theme-toggle" aria-label="Switch theme" title="Switch theme">☀</button>
+      <button class="menu-button" id="menu-toggle" aria-label="Open menu">☰</button>
     </div>
+  </header>
 
-    <div id="category-result" class="card" style="margin-top:25px; display:none;">
-        <h3 id="category-title"></h3>
-        <p id="category-fact"></p>
-    </div>
-
-</section>
-
-<section class="section" id="quiz">
-
-    <h2>🧠 Test Your Knowledge</h2>
-
-    <div class="card quiz-card">
-
-        <h3 id="quiz-question">
-            Which planet is known as the Red Planet?
-        </h3>
-
-        <div class="quiz-options">
-
-            <button class="option" onclick="checkAnswer(this, false)">
-                Venus
-            </button>
-
-            <button class="option" onclick="checkAnswer(this, true)">
-                Mars
-            </button>
-
-            <button class="option" onclick="checkAnswer(this, false)">
-                Jupiter
-            </button>
-
-            <button class="option" onclick="checkAnswer(this, false)">
-                Saturn
-            </button>
-
+  <main id="home">
+    <section class="hero shell">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="live-dot"></span> YOUR CURIOSITY STARTS HERE</div>
+        <h1>Make every day<br> a little more <span class="gradient-text">curious.</span></h1>
+        <p>Explore fascinating facts, test what you know, and build your knowledge one discovery at a time.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#discover">Start exploring <span>↗</span></a>
+          <a class="button button-quiet" href="#quiz">Take a quick quiz</a>
         </div>
+        <div class="hero-proof"><span class="avatar-stack"><i>🌌</i><i>🧬</i><i>🌿</i></span><span>Curiosity has no limits.</span></div>
+      </div>
+      <div class="hero-visual" aria-label="Abstract glowing planet illustration">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        <div class="planet"><div class="planet-shine"></div></div>
+        <div class="float-card float-card-top"><span>✦</span><div><b>Daily discovery</b><small>One new thing today</small></div></div>
+        <div class="float-card float-card-bottom"><span>⚡</span><div><b id="hero-xp">0 XP earned</b><small>Your curiosity score</small></div></div>
+        <div class="spark spark-one">✧</div><div class="spark spark-two">✦</div>
+      </div>
+    </section>
 
-        <p id="quiz-result">Choose your answer!</p>
+    <section class="stats-strip shell" aria-label="Your learning statistics">
+      <div class="stat"><span class="stat-icon">🧠</span><div><b id="stat-xp">0</b><small>Total XP</small></div></div>
+      <div class="stat"><span class="stat-icon">🔥</span><div><b id="stat-streak">0 days</b><small>Daily streak</small></div></div>
+      <div class="stat"><span class="stat-icon">🏆</span><div><b id="stat-quizzes">0</b><small>Quiz answers correct</small></div></div>
+      <div class="stat"><span class="stat-icon">⭐</span><div><b id="stat-saved">0</b><small>Saved discoveries</small></div></div>
+    </section>
 
-        <button id="next-question" onclick="nextQuestion()">
-            Next Question →
-        </button>
+    <section class="section shell" id="discover">
+      <div class="section-heading">
+        <div><div class="eyebrow">A MOMENT OF WONDER</div><h2>Today's discovery<span class="accent-dot">.</span></h2><p>A small fact can open up a big idea.</p></div>
+        <button class="button button-outline" id="random-fact">Surprise me ↻</button>
+      </div>
+      <article class="discovery-card">
+        <div class="discovery-art" id="discovery-art"><span>🌠</span><i class="art-orbit"></i></div>
+        <div class="discovery-content">
+          <div class="tag-row"><span class="tag" id="fact-category">SPACE</span><span class="subtle" id="fact-count">DISCOVERY 01</span></div>
+          <h3 id="fact-title">The universe is full of surprises.</h3>
+          <p id="fact-description">Tap “Surprise me” to reveal a fascinating fact and learn something new.</p>
+          <div class="discovery-actions"><button class="button button-primary" id="another-fact">Next discovery <span>→</span></button><button class="save-button" id="save-fact">☆ Save fact</button></div>
+        </div>
+      </article>
+      <div class="search-row">
+        <div class="section-heading compact"><div><div class="eyebrow">FIND YOUR INTEREST</div><h2>Explore topics</h2></div></div>
+        <label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search facts or topics..." autocomplete="off"><kbd>SEARCH</kbd></label>
+      </div>
+      <div class="category-grid" id="category-grid">
+        <button class="category-card" data-category="Space"><span class="category-emoji">🌌</span><span><b>Space</b><small>Stars, planets & beyond</small></span><i>↗</i></button>
+        <button class="category-card" data-category="Nature"><span class="category-emoji">🌿</span><span><b>Nature</b><small>Wildlife & our planet</small></span><i>↗</i></button>
+        <button class="category-card" data-category="Science"><span class="category-emoji">🧪</span><span><b>Science</b><small>Ideas that explain life</small></span><i>↗</i></button>
+        <button class="category-card" data-category="Technology"><span class="category-emoji">💻</span><span><b>Technology</b><small>Inventions & innovation</small></span><i>↗</i></button>
+        <button class="category-card" data-category="History"><span class="category-emoji">🏛️</span><span><b>History</b><small>Stories from the past</small></span><i>↗</i></button>
+        <button class="category-card" data-category="Human Body"><span class="category-emoji">🫀</span><span><b>Human body</b><small>The science of you</small></span><i>↗</i></button>
+      </div>
+      <div class="results-panel" id="results-panel" hidden><div class="results-head"><h3 id="results-title">Search results</h3><button class="text-button" id="clear-search">Clear ×</button></div><div id="results-list" class="results-list"></div></div>
+    </section>
 
-    </div>
+    <section class="section section-tint" id="quiz">
+      <div class="shell">
+        <div class="section-heading"><div><div class="eyebrow">PUT YOUR KNOWLEDGE TO THE TEST</div><h2>Quick quiz<span class="accent-dot">.</span></h2><p>Answer a few questions and earn XP.</p></div><div class="quiz-counter" id="quiz-counter">QUESTION 1 / 5</div></div>
+        <div class="quiz-layout">
+          <div class="quiz-main card-surface">
+            <div class="quiz-progress"><span id="quiz-progress-bar"></span></div>
+            <div class="tag-row"><span class="tag tag-purple">GENERAL KNOWLEDGE</span><span class="subtle">+10 XP for each correct answer</span></div>
+            <h3 id="quiz-question">Loading your first question...</h3>
+            <div class="quiz-options" id="quiz-options"></div>
+            <div class="quiz-feedback" id="quiz-feedback" aria-live="polite">Choose the answer you think is right.</div>
+            <div class="quiz-footer"><span id="quiz-score">Score: 0</span><button class="button button-primary" id="quiz-next" disabled>Next question →</button></div>
+          </div>
+          <aside class="quiz-side card-surface"><div class="side-icon">🎯</div><h3>Stay curious.</h3><p>Every question is a chance to learn something new. You can replay the quiz whenever you like.</p><div class="side-divider"></div><div class="mini-stat"><b id="best-score">0</b><span>Best score</span></div></aside>
+        </div>
+      </div>
+    </section>
 
-</section>
-<!-- Daily Challenge -->
-<section id="daily-challenge">
-    <h2>🎯 Daily Challenge</h2>
+    <section class="section shell" id="challenge">
+      <div class="challenge-banner">
+        <div class="challenge-copy"><div class="eyebrow"><span class="live-dot"></span> A NEW CHALLENGE EVERY DAY</div><h2>Today's brain<br><span class="gradient-text">boost.</span></h2><p>One daily question. One little step forward. Come back tomorrow for a new challenge.</p><div class="challenge-date" id="challenge-date">TODAY'S CHALLENGE</div></div>
+        <div class="challenge-box"><div class="challenge-top"><span>DAILY CHALLENGE</span><span class="tag tag-gold">+25 XP</span></div><h3 id="daily-question">Loading today's question...</h3><div id="daily-options" class="daily-options"></div><p id="daily-feedback" class="daily-feedback" aria-live="polite">Choose your answer to complete today's challenge.</p><div class="daily-status" id="daily-status">◷ Available today</div></div>
+        <div class="challenge-decoration">✦</div>
+      </div>
+    </section>
 
-    <div class="card">
-       <h3 id="daily-question"></h3>
+    <section class="section shell" id="profile">
+      <div class="section-heading"><div><div class="eyebrow">YOUR PERSONAL SPACE</div><h2>Your progress<span class="accent-dot">.</span></h2><p>Your progress is saved in this browser on this device.</p></div><button class="button button-outline" id="edit-name">Edit profile ✎</button></div>
+      <div class="profile-grid">
+        <div class="profile-card card-surface"><div class="profile-avatar">✦</div><div><small>WELCOME BACK</small><h3 id="profile-name">Curious Explorer</h3><span class="level-pill" id="level-label">LEVEL 1 · EXPLORER</span></div><div class="level-progress"><div class="level-progress-label"><span>Next level</span><b id="level-progress-text">0 / 100 XP</b></div><div class="progress-track"><span id="level-progress-bar"></span></div></div></div>
+        <div class="profile-card card-surface saved-card"><div class="saved-head"><div><small>YOUR COLLECTION</small><h3>Saved discoveries</h3></div><span class="saved-count" id="saved-count">0</span></div><div id="saved-list" class="saved-list"><p class="empty-state">Your saved facts will appear here. Save a discovery you love!</p></div></div>
+        <div class="profile-card card-surface achievements-card"><small>KEEP GOING</small><h3>Achievements</h3><div class="achievement-list" id="achievement-list"></div></div>
+      </div>
+    </section>
+  </main>
 
-        <div class="quiz-options" id="daily-options"></div>
+  <footer class="footer"><a class="brand" href="#home"><span class="brand-mark">✦</span><span>WOLQX <b>DAILY</b></span></a><p>Stay curious. Keep discovering.</p><span>© <span id="year"></span> WOLQX DAILY</span></footer>
 
-        <p id="daily-result"></p>
-        <p>🏆 Your Score: <span id="daily-score">0</span></p>
-    </div>
-</section>
-        <section class="section" id="about">
-            <h2>About CurioLab</h2>
-
-            <div class="card">
-                <p>
-                    CurioLab is a place for curious minds.
-                    Discover facts, explore ideas and enjoy learning!
-                </p>
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
-        © 2026 CurioLab. Made for curious minds.
-    </footer>
-
-    <script src="script.js"></script>
-
+  <dialog id="profile-dialog" class="profile-dialog"><form method="dialog" id="profile-form"><div class="dialog-close-row"><span class="eyebrow">YOUR PROFILE</span><button class="icon-button" value="cancel" aria-label="Close">×</button></div><h2>What should we call you?</h2><p>Your name is stored only in this browser.</p><input id="name-input" maxlength="24" placeholder="Enter a display name" autocomplete="nickname"><div class="dialog-actions"><button class="button button-quiet" value="cancel">Cancel</button><button class="button button-primary" id="save-name" value="save">Save name</button></div></form></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>

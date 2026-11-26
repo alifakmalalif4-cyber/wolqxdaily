@@ -1,361 +1,67 @@
-
+// WOLQX DAILY 2.0 — local-first learning experience
 const facts = [
-    {
-        title: "Octopuses have three hearts!",
-        description: "Two hearts pump blood to the gills, while one pumps it to the rest of the body."
-    },
-    {
-        title: "Venus has a very long day!",
-        description: "One rotation of Venus takes longer than one trip around the Sun."
-    },
-    {
-        title: "Sharks are older than trees!",
-        description: "Shark ancestors existed hundreds of millions of years ago."
-    },
-    {
-        title: "Honey lasts a long time!",
-        description: "Properly sealed honey can remain edible for a very long time."
-    },
-    {
-        title: "Space is incredibly huge!",
-        description: "The observable universe contains billions of galaxies."
-    }
+ {category:"Space",emoji:"🌌",title:"A day on Venus is longer than its year.",description:"Venus rotates very slowly. One full rotation takes about 243 Earth days, while one trip around the Sun takes about 225 Earth days."},
+ {category:"Nature",emoji:"🐙",title:"Octopuses have three hearts.",description:"Two hearts move blood toward the gills, while a third pumps it to the rest of the body."},
+ {category:"Science",emoji:"💡",title:"Lightning can heat the air around it extremely quickly.",description:"The air in a lightning channel can become much hotter than the surface of the Sun for a very short time."},
+ {category:"Technology",emoji:"🖱️",title:"The first computer mouse had a wooden case.",description:"Douglas Engelbart and his team developed an early computer mouse in the 1960s. Its case was made of wood."},
+ {category:"History",emoji:"📚",title:"The ancient Library of Alexandria was a famous centre of learning.",description:"It was part of a wider research institution in ancient Egypt that attracted scholars from different places."},
+ {category:"Human Body",emoji:"🫀",title:"Your heart beats around 100,000 times a day.",description:"The exact number varies with activity, age and other factors, but the heart works continuously to circulate blood."},
+ {category:"Space",emoji:"🪐",title:"Jupiter is the largest planet in our Solar System.",description:"Jupiter is so large that more than 1,300 Earths could fit inside it by volume."},
+ {category:"Nature",emoji:"🌳",title:"Some bamboo species grow remarkably fast.",description:"Under ideal conditions, certain bamboo species can grow close to a metre in a single day."},
+ {category:"Science",emoji:"🌈",title:"A rainbow is a full circle.",description:"From the ground, we usually see only an arc because the horizon blocks the lower part. From an aircraft, a full circular rainbow can sometimes be seen."},
+ {category:"Technology",emoji:"🔳",title:"QR codes were first developed for tracking parts.",description:"A Japanese company developed QR codes in the 1990s to help track components in vehicle manufacturing."},
+ {category:"History",emoji:"🧭",title:"The compass changed long-distance navigation.",description:"Magnetic compasses helped sailors determine direction and became an important tool for travel and exploration."},
+ {category:"Human Body",emoji:"🦴",title:"Adults usually have 206 bones.",description:"Babies are born with more separate bones. Some fuse together as the body grows."}
 ];
-
-function showRandomFact() {
-    const randomIndex = Math.floor(Math.random() * facts.length);
-
-    document.getElementById("fact-title").textContent =
-        facts[randomIndex].title;
-
-    document.getElementById("fact-description").textContent =
-        facts[randomIndex].description;
-}
-
-function welcomeUser() {
-    alert("Welcome to CurioLab! Let's discover something new!");
-}
-
-// CUR IOLAB QUIZ SYSTEM
-
 const quizQuestions = [
-    {
-        question: "Which planet is known as the Red Planet?",
-        options: ["Venus", "Mars", "Jupiter", "Saturn"],
-        answer: "Mars"
-    },
-    {
-        question: "Which is the largest ocean?",
-        options: ["Indian", "Atlantic", "Pacific", "Arctic"],
-        answer: "Pacific"
-    },
-    {
-        question: "How many hearts does an octopus have?",
-        options: ["One", "Two", "Three", "Four"],
-        answer: "Three"
-    },
-    {
-        question: "Which gas do plants absorb?",
-        options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
-        answer: "Carbon dioxide"
-    },
-    {
-        question: "Which is the closest star to Earth?",
-        options: ["Sirius", "Sun", "Polaris", "Vega"],
-        answer: "Sun"
-    }
+ {q:"Which planet is known as the Red Planet?",o:["Venus","Mars","Jupiter","Saturn"],a:1,why:"Mars looks reddish because iron-rich minerals in its soil have oxidised."},
+ {q:"Which is the largest ocean on Earth?",o:["Atlantic","Indian","Pacific","Arctic"],a:2,why:"The Pacific Ocean is the largest and deepest ocean basin."},
+ {q:"Which gas do plants absorb during photosynthesis?",o:["Oxygen","Carbon dioxide","Nitrogen","Hydrogen"],a:1,why:"Plants use carbon dioxide, water and light energy to make sugars."},
+ {q:"What is the closest star to Earth?",o:["Sirius","The Sun","Polaris","Vega"],a:1,why:"The Sun is our nearest star."},
+ {q:"How many hearts does an octopus have?",o:["One","Two","Three","Four"],a:2,why:"An octopus has two hearts for the gills and one for the body."},
+ {q:"Which instrument measures temperature?",o:["Barometer","Thermometer","Compass","Hygrometer"],a:1,why:"A thermometer measures temperature."},
+ {q:"What is the chemical formula of water?",o:["CO₂","O₂","H₂O","NaCl"],a:2,why:"A water molecule contains two hydrogen atoms and one oxygen atom."}
 ];
-
-let currentQuestion = 0;
-let quizScore = 0;
-let quizAnswered = false;
-
-function loadQuestion() {
-    const q = quizQuestions[currentQuestion];
-
-    document.getElementById("quiz-question").textContent = q.question;
-
-    const optionsBox = document.querySelector(".quiz-options");
-    optionsBox.innerHTML = "";
-
-    q.options.forEach(option => {
-        const button = document.createElement("button");
-
-        button.className = "option";
-        button.textContent = option;
-
-        button.onclick = function() {
-            checkAnswer(button, option === q.answer);
-        };
-
-        optionsBox.appendChild(button);
-    });
-
-    document.getElementById("quiz-result").textContent =
-        "Choose your answer!";
-
-    document.getElementById("next-question").textContent =
-        "Next Question →";
-
-    quizAnswered = false;
-}
-
-function checkAnswer(button, isCorrect) {
-    if (quizAnswered) return;
-
-    quizAnswered = true;
-
-    const allOptions = document.querySelectorAll(".option");
-
-    allOptions.forEach(option => {
-        option.disabled = true;
-
-        if (option.textContent === quizQuestions[currentQuestion].answer) {
-            option.classList.add("correct");
-        }
-    });
-
-    if (isCorrect) {
-        quizScore++;
-        document.getElementById("quiz-result").textContent =
-            "🎉 Correct! Amazing work!";
-    } else {
-        button.classList.add("wrong");
-
-        document.getElementById("quiz-result").textContent =
-            "Not quite! The correct answer is " +
-            quizQuestions[currentQuestion].answer;
-    }
-}
-
-function nextQuestion() {
-    if (!quizAnswered) {
-        document.getElementById("quiz-result").textContent =
-            "Choose an answer first!";
-        return;
-    }
-
-    currentQuestion++;
-
-    if (currentQuestion >= quizQuestions.length) {
-        document.getElementById("quiz-question").textContent =
-            "Quiz Completed! 🏆";
-
-        document.querySelector(".quiz-options").innerHTML = "";
-
-        document.getElementById("quiz-result").textContent =
-            "Your score: " + quizScore + " / " + quizQuestions.length;
-
-        document.getElementById("next-question").textContent =
-            "Play Again ↻";
-
-        quizAnswered = false;
-        currentQuestion = -1;
-        return;
-    }
-
-    loadQuestion();
-}
-
-loadQuestion();
-
-// CUR IOLAB CATEGORY SYSTEM
-
-const categoryFacts = {
-    Space: [
-        "Saturn is famous for its beautiful ring system.",
-        "The Sun is the closest star to Earth.",
-        "Jupiter is the largest planet in our Solar System."
-    ],
-
-    Nature: [
-        "A group of lions is called a pride.",
-        "Bamboo is one of the fastest-growing plants.",
-        "Octopuses have three hearts."
-    ],
-
-    Science: [
-        "Water is made of hydrogen and oxygen.",
-        "Light travels faster than sound.",
-        "The human body has 206 bones in adulthood."
-    ],
-
-    Technology: [
-        "The first computer mouse was made of wood.",
-        "The World Wide Web was invented by Tim Berners-Lee.",
-        "QR codes were first developed in Japan."
-    ]
-};
-
-function showCategoryFacts(category) {
-
-    const facts = categoryFacts[category];
-
-    const randomIndex = Math.floor(Math.random() * facts.length);
-
-    document.getElementById("category-title").textContent =
-        "✨ " + category + " Discovery";
-
-    document.getElementById("category-fact").textContent =
-        facts[randomIndex];
-
-    document.getElementById("category-result").style.display = "block";
-
-    document.getElementById("category-result").scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-    });
-}
-
-// CATEGORY SEARCH SYSTEM
-
-function searchCategories() {
-
-    const searchValue = document
-        .getElementById("category-search")
-        .value.toLowerCase().trim();
-
-    const cards = document.querySelectorAll(".category-card");
-
-    let found = 0;
-
-    cards.forEach(card => {
-
-        const categoryName =
-            card.querySelector("h3").textContent.toLowerCase();
-
-        if (categoryName.includes(searchValue)) {
-            card.style.display = "block";
-            found++;
-        } else {
-            card.style.display = "none";
-        }
-
-    });
-
-    const message = document.getElementById("search-message");
-
-    if (searchValue === "") {
-        message.textContent = "";
-    } else if (found === 0) {
-        message.textContent = "No categories found. Try another search!";
-    } else {
-        message.textContent = found + " category found!";
-    }
-}
-
-
-function toggleTheme() {
-    document.body.classList.toggle("light-mode");
-
-    const button = document.getElementById("theme-toggle");
-
-    if (document.body.classList.contains("light-mode")) {
-        button.textContent = "🌙 Dark Mode";
-    } else {
-        button.textContent = "☀️ Light Mode";
-    }
-}
-
-function checkDailyAnswer(button, isCorrect) {
-    const result = document.getElementById("daily-result");
-    const buttons = button.parentElement.querySelectorAll("button");
-const todayKey = new Date().toDateString();
-localStorage.setItem("dailyChallengeDate", todayKey);
-localStorage.setItem("dailyChallengeAnswered", "true");
-    if (isCorrect) {
-        let score = document.getElementById("daily-score");
-score.textContent = Number(score.textContent) + 1;
-localStorage.setItem("dailyChallengeScore", score.textContent);
-        result.textContent = "🎉 Correct! Mars is the Red Planet!";
-        result.style.color = "#22c55e";
-    } else {
-        result.textContent = "❌ Not quite! The correct answer is Mars.";
-        result.style.color = "#ef4444";
-    }
-
-    buttons.forEach(btn => {
-        btn.disabled = true;
-    });
-}
-
 const dailyQuestions = [
-    {
-        question: "Which planet is known as the Red Planet?",
-        options: ["Earth", "Mars", "Venus", "Jupiter"],
-        answer: 1
-    },
-    {
-        question: "Which is the largest ocean on Earth?",
-        options: ["Atlantic", "Indian", "Pacific", "Arctic"],
-        answer: 2
-    },
-    {
-        question: "Which gas do plants absorb?",
-        options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
-        answer: 1
-    },
-    {
-        question: "What is the largest planet?",
-        options: ["Earth", "Saturn", "Mars", "Jupiter"],
-        answer: 3
-    },
-    {
-        question: "How many bones are there in an adult human body?",
-        options: ["206", "201", "210", "196"],
-        answer: 0
-    }
+ {q:"Which planet has the most prominent ring system?",o:["Mars","Saturn","Mercury","Earth"],a:1,why:"Saturn's bright rings are made mostly of ice particles and rocky material."},
+ {q:"What is the largest mammal on Earth?",o:["African elephant","Blue whale","Giraffe","Hippopotamus"],a:1,why:"The blue whale is the largest known animal to have ever lived."},
+ {q:"Which part of a plant usually absorbs water from soil?",o:["Flower","Leaf","Root","Fruit"],a:2,why:"Roots absorb water and minerals from the soil."},
+ {q:"Which natural material is made by bees?",o:["Silk","Honey","Latex","Cotton"],a:1,why:"Honey bees make honey from nectar."},
+ {q:"Which planet is closest to the Sun?",o:["Venus","Earth","Mercury","Mars"],a:2,why:"Mercury is the innermost planet in the Solar System."},
+ {q:"Which organ pumps blood around the body?",o:["Lungs","Brain","Heart","Kidney"],a:2,why:"The heart is a muscular pump that circulates blood."},
+ {q:"What is the main language used to structure web pages?",o:["HTML","CSS","Python","SQL"],a:0,why:"HTML provides the structure and meaning of web page content."}
 ];
-
-// Load the daily challenge
-function loadDailyChallenge() {
-    const today = new Date();
-    const dayNumber = Math.floor(today.getTime() / 86400000);
-
-    const questionIndex = dayNumber % dailyQuestions.length;
-    const todayQuestion = dailyQuestions[questionIndex];
-
-    document.getElementById("daily-question").textContent =
-        todayQuestion.question;
-
-    const optionsContainer = document.getElementById("daily-options");
-
-    optionsContainer.innerHTML = "";
-
-    todayQuestion.options.forEach((option, index) => {
-        const button = document.createElement("button");
-
-        button.textContent = option;
-
-        button.onclick = function () {
-            checkDailyAnswer(this, index === todayQuestion.answer);
-        };
-
-        optionsContainer.appendChild(button);
-    });
-}
-
-loadDailyChallenge();
-
-// Restore daily challenge progress
-const todayKey = new Date().toDateString();
-
-const savedDate = localStorage.getItem("dailyChallengeDate");
-const savedScore = localStorage.getItem("dailyChallengeScore");
-
-const scoreDisplay = document.getElementById("daily-score");
-
-if (savedDate === todayKey) {
-    scoreDisplay.textContent = savedScore || "0";
-
-    if (localStorage.getItem("dailyChallengeAnswered") === "true") {
-        document.querySelectorAll("#daily-options button").forEach(btn => {
-            btn.disabled = true;
-        });
-
-        document.getElementById("daily-result").textContent =
-            "🎉 You've completed today's challenge! Come back tomorrow!";
-    }
-} else {
-    scoreDisplay.textContent = "0";
-}
+const STORAGE_KEY="wolqxDailyV2";
+const defaults={xp:0,correct:0,best:0,streak:0,lastVisit:"",lastDaily:"",dailyDone:false,saved:[],name:"Curious Explorer",theme:"dark"};
+let state={...defaults,...loadState()};
+function loadState(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{}}catch{return {}}}
+function saveState(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));renderStats()}
+function todayKey(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
+function yesterdayKey(){const d=new Date();d.setDate(d.getDate()-1);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
+function toast(message){const el=document.getElementById("toast");el.textContent=message;el.classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove("show"),2300)}
+function renderStats(){document.getElementById("stat-xp").textContent=state.xp;document.getElementById("hero-xp").textContent=`${state.xp} XP earned`;document.getElementById("stat-streak").textContent=`${state.streak} days`;document.getElementById("stat-quizzes").textContent=state.correct;document.getElementById("stat-saved").textContent=state.saved.length;document.getElementById("best-score").textContent=state.best;document.getElementById("profile-name").textContent=state.name;const level=Math.floor(state.xp/100)+1,within=state.xp%100;const names=["Explorer","Curious Mind","Fact Finder","Knowledge Seeker","WOLQX Scholar"];const label=names[Math.min(level-1,names.length-1)]||"WOLQX Legend";document.getElementById("level-label").textContent=`LEVEL ${level} · ${label.toUpperCase()}`;document.getElementById("level-progress-text").textContent=`${within} / 100 XP`;document.getElementById("level-progress-bar").style.width=`${within}%`;renderSaved();renderAchievements()}
+function visitStreak(){const today=todayKey();if(state.lastVisit!==today){state.streak=state.lastVisit===yesterdayKey()?state.streak+1:1;state.lastVisit=today;saveState()}}
+let currentFact=null;
+function showFact(fact){currentFact=fact;document.getElementById("fact-category").textContent=fact.category.toUpperCase();document.getElementById("fact-title").textContent=fact.title;document.getElementById("fact-description").textContent=fact.description;document.getElementById("discovery-art").querySelector("span").textContent=fact.emoji;document.getElementById("fact-count").textContent=`DISCOVERY ${String(facts.indexOf(fact)+1).padStart(2,"0")}`;const saved=state.saved.some(x=>x.title===fact.title);document.getElementById("save-fact").textContent=saved?"★ Saved":"☆ Save fact"}
+function randomFact(){let next=facts[Math.floor(Math.random()*facts.length)];if(facts.length>1&&currentFact===next)next=facts[(facts.indexOf(next)+1)%facts.length];showFact(next)}
+document.getElementById("random-fact").addEventListener("click",randomFact);document.getElementById("another-fact").addEventListener("click",randomFact);
+document.getElementById("save-fact").addEventListener("click",()=>{if(!currentFact)return;const i=state.saved.findIndex(x=>x.title===currentFact.title);if(i>=0){state.saved.splice(i,1);toast("Removed from saved discoveries.")}else{state.saved.unshift(currentFact);toast("Discovery saved! +5 XP");state.xp+=5}saveState();showFact(currentFact)});
+function renderSaved(){const box=document.getElementById("saved-list");document.getElementById("saved-count").textContent=state.saved.length;if(!state.saved.length){box.innerHTML='<p class="empty-state">Your saved facts will appear here. Save a discovery you love!</p>';return}box.innerHTML="";state.saved.slice(0,6).forEach(f=>{const row=document.createElement("div");row.className="saved-item";const emoji=document.createElement("span");emoji.textContent=f.emoji;const title=document.createElement("b");title.textContent=f.title;const remove=document.createElement("button");remove.type="button";remove.textContent="×";remove.setAttribute("aria-label","Remove saved fact");remove.addEventListener("click",()=>{state.saved=state.saved.filter(x=>x.title!==f.title);saveState()});row.append(emoji,title,remove);box.append(row)})}
+function renderAchievements(){const items=[["🌱","First steps",state.xp>=10],["🧠","Curious thinker",state.correct>=3],["🔥","Three-day streak",state.streak>=3],["⭐","Collector",state.saved.length>=3],["🏆","Knowledge builder",state.xp>=100]];const box=document.getElementById("achievement-list");box.innerHTML="";items.forEach(([emoji,name,ok])=>{const row=document.createElement("div");row.className=`achievement ${ok?"unlocked":""}`;const icon=document.createElement("span");icon.textContent=emoji;const label=document.createElement("b");label.textContent=name;row.append(icon,label);box.append(row)})}
+function searchContent(){const q=document.getElementById("search-input").value.trim().toLowerCase();const panel=document.getElementById("results-panel");if(!q){panel.hidden=true;return}const matches=facts.filter(f=>`${f.category} ${f.title} ${f.description}`.toLowerCase().includes(q));panel.hidden=false;document.getElementById("results-title").textContent=`${matches.length} result${matches.length===1?"":"s"} for “${q}”`;const list=document.getElementById("results-list");list.innerHTML="";if(!matches.length){list.innerHTML='<p class="empty-state">No discoveries found. Try another word or topic.</p>';return}matches.forEach(f=>{const item=document.createElement("div");item.className="result-item";const title=document.createElement("b");title.textContent=`${f.emoji} ${f.title}`;const desc=document.createElement("p");desc.textContent=f.description;item.append(title,desc);list.append(item)})}
+document.getElementById("search-input").addEventListener("input",searchContent);document.getElementById("clear-search").addEventListener("click",()=>{document.getElementById("search-input").value="";searchContent()});
+document.querySelectorAll(".category-card").forEach(btn=>btn.addEventListener("click",()=>{const category=btn.dataset.category;document.getElementById("search-input").value=category;searchContent();document.getElementById("results-panel").scrollIntoView({behavior:"smooth",block:"center"})}));
+let quizIndex=0,quizScore=0,quizLocked=false,quizOrder=[];
+function shuffleQuiz(){quizOrder=[...quizQuestions].sort(()=>Math.random()-.5).slice(0,5);quizIndex=0;quizScore=0;quizLocked=false;renderQuiz()}
+function renderQuiz(){const q=quizOrder[quizIndex];document.getElementById("quiz-counter").textContent=`QUESTION ${quizIndex+1} / ${quizOrder.length}`;document.getElementById("quiz-progress-bar").style.width=`${(quizIndex/quizOrder.length)*100}%`;document.getElementById("quiz-question").textContent=q.q;document.getElementById("quiz-score").textContent=`Score: ${quizScore}`;document.getElementById("quiz-feedback").textContent="Choose the answer you think is right.";document.getElementById("quiz-next").disabled=true;document.getElementById("quiz-next").textContent=quizIndex===quizOrder.length-1?"See results →":"Next question →";const box=document.getElementById("quiz-options");box.innerHTML="";q.o.forEach((option,i)=>{const b=document.createElement("button");b.className="quiz-option";b.textContent=option;b.addEventListener("click",()=>answerQuiz(i,b));box.append(b)})}
+function answerQuiz(index,button){if(quizLocked)return;quizLocked=true;const q=quizOrder[quizIndex];const buttons=[...document.querySelectorAll(".quiz-option")];buttons.forEach((b,i)=>{b.disabled=true;if(i===q.a)b.classList.add("correct")});if(index===q.a){quizScore++;state.xp+=10;state.correct++;document.getElementById("quiz-feedback").textContent=`Correct! ${q.why} +10 XP`;button.classList.add("correct")}else{button.classList.add("incorrect");document.getElementById("quiz-feedback").textContent=`Not quite. ${q.why}`}document.getElementById("quiz-score").textContent=`Score: ${quizScore}`;document.getElementById("quiz-next").disabled=false;saveState()}
+document.getElementById("quiz-next").addEventListener("click",()=>{if(!quizLocked)return;if(quizIndex<quizOrder.length-1){quizIndex++;quizLocked=false;renderQuiz()}else{state.best=Math.max(state.best,quizScore);state.xp+=quizScore*5;saveState();document.getElementById("quiz-question").textContent=`Quiz complete! You scored ${quizScore} / ${quizOrder.length}.`;document.getElementById("quiz-options").innerHTML="";document.getElementById("quiz-feedback").textContent="Great effort. Replay to try a new set of questions.";document.getElementById("quiz-progress-bar").style.width="100%";document.getElementById("quiz-next").textContent="Play again ↻";document.getElementById("quiz-next").onclick=()=>{document.getElementById("quiz-next").onclick=null;shuffleQuiz()}}});
+function loadDaily(){const day=Math.floor(Date.now()/86400000);const q=dailyQuestions[day%dailyQuestions.length];document.getElementById("challenge-date").textContent=new Date().toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric"}).toUpperCase();document.getElementById("daily-question").textContent=q.q;const box=document.getElementById("daily-options");box.innerHTML="";q.o.forEach((option,i)=>{const b=document.createElement("button");b.className="daily-option";b.textContent=option;b.addEventListener("click",()=>answerDaily(i,q,b));box.append(b)});if(state.lastDaily===todayKey()&&state.dailyDone){document.querySelectorAll(".daily-option").forEach(b=>b.disabled=true);document.getElementById("daily-feedback").textContent="You have completed today's challenge. Come back tomorrow!";document.getElementById("daily-status").textContent="✓ Completed today"}else{document.getElementById("daily-feedback").textContent="Choose your answer to complete today's challenge.";document.getElementById("daily-status").textContent="◷ Available today"}}
+function answerDaily(index,q,button){if(state.lastDaily===todayKey()&&state.dailyDone)return;document.querySelectorAll(".daily-option").forEach((b,i)=>{b.disabled=true;if(i===q.a)b.classList.add("correct")});if(index===q.a){state.xp+=25;state.correct++;document.getElementById("daily-feedback").textContent=`Correct! ${q.why} +25 XP`;button.classList.add("correct")}else{button.classList.add("incorrect");document.getElementById("daily-feedback").textContent=`Good try! ${q.why}`}state.lastDaily=todayKey();state.dailyDone=true;document.getElementById("daily-status").textContent="✓ Completed today";saveState()}
+document.getElementById("edit-name").addEventListener("click",()=>{document.getElementById("name-input").value=state.name;document.getElementById("profile-dialog").showModal()});
+document.getElementById("profile-form").addEventListener("submit",e=>{if(e.submitter&&e.submitter.id==="save-name"){e.preventDefault();const name=document.getElementById("name-input").value.trim();if(name)state.name=name;saveState();document.getElementById("profile-dialog").close();toast("Profile updated.")}});
+document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.classList.toggle("light-mode");state.theme=document.body.classList.contains("light-mode")?"light":"dark";document.getElementById("theme-toggle").textContent=state.theme==="light"?"☾":"☀";saveState()});
+if(state.theme==="light"){document.body.classList.add("light-mode");document.getElementById("theme-toggle").textContent="☾"}
+document.getElementById("menu-toggle").addEventListener("click",()=>document.getElementById("main-nav").classList.toggle("open"));document.querySelectorAll(".nav-link").forEach(a=>a.addEventListener("click",()=>document.getElementById("main-nav").classList.remove("open")));
+document.getElementById("year").textContent=new Date().getFullYear();
+visitStreak();showFact(facts[Math.floor(Date.now()/86400000)%facts.length]);renderStats();shuffleQuiz();loadDaily();
